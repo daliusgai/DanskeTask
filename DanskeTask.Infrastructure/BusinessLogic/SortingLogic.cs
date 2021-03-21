@@ -1,5 +1,4 @@
-﻿using DanskeTask.Core.Interfaces.Services;
-using System;
+﻿using DanskeTask.Core.Interfaces.BusinessLogic;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,18 +6,6 @@ namespace DanskeTask.Infrastructure.BusinessLogic
 {
     public class SortingLogic : ISortingLogic
     {
-        public List<long> ConvertToListOfNumbers(string stringOfNumbers, char delimiter) 
-        {
-            var listOfNumbersAsString = stringOfNumbers.Split(delimiter).ToList();
-
-            return listOfNumbersAsString.ConvertAll(x => Convert.ToInt64(x)).ToList();
-        }
-
-        public string ConvertToStringOfNumbers(IEnumerable<long> numbersList, char delimiter)
-        {
-            return string.Join(delimiter.ToString(), numbersList);
-        }
-
         public void SortUsingBubbleSort(List<long> numberList)
         {
             if (numberList is null || !numberList.Any())
@@ -91,7 +78,6 @@ namespace DanskeTask.Infrastructure.BusinessLogic
             if (newLeftPointer < rightPointer)
                 SortUsingQuickSort(numberList, newLeftPointer, rightPointer);
         }
-
 
         private void Swap(List<long> data, int firstPosition, int secondPosition)
         {

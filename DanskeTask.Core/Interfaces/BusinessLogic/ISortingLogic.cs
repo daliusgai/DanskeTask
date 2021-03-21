@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace DanskeTask.Core.Interfaces.Services
+namespace DanskeTask.Core.Interfaces.BusinessLogic
 {
     public interface ISortingLogic
     {
-        List<long> ConvertToListOfNumbers(string stringOfNumbers, char delimiter);
-
-        string ConvertToStringOfNumbers(IEnumerable<long> numbersList, char delimiter);
-
         void SortUsingBubbleSort(List<long> numberList);
 
         void SortUsingInsertionSort(List<long> numberList);

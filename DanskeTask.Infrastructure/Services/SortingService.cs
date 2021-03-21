@@ -1,5 +1,6 @@
 ﻿using DanskeTask.Core.DTO;
 using DanskeTask.Core.Enumerators;
+using DanskeTask.Core.Interfaces.BusinessLogic;
 using DanskeTask.Core.Interfaces.Repositories;
 using DanskeTask.Core.Interfaces.Services;
 using System;
@@ -12,18 +13,20 @@ namespace DanskeTask.Infrastructure.Services
     {
         private readonly ISortingRepository _sortingRepository;
         private readonly ISortingLogic _sortingLogic;
+        private readonly IConversionLogic _conversionLogic;
 
-        public SortingService(ISortingRepository sortingRepository, ISortingLogic sortingLogic)
+        public SortingService(ISortingRepository sortingRepository, ISortingLogic sortingLogic, IConversionLogic conversionLogic)
         {
             _sortingRepository = sortingRepository;
             _sortingLogic = sortingLogic;
+            _conversionLogic = conversionLogic;
         }
 
         public SortResponseDTO Sort(string stringOfNumbers) 
         {
             try
             {
-                var numberList = _sortingLogic.ConvertToListOfNumbers(stringOfNumbers, ' ');
+                var numberList = _conversionLogic.ConvertToListOfNumbers(stringOfNumbers, ' ');
 
                 var firstCopyOfNumberList = new List<long>(numberList);
                 var secondCopyOfNumberList = new List<long>(numberList);
@@ -33,7 +36,7 @@ namespace DanskeTask.Infrastructure.Services
                 var secondResult = SortUsingAlgorithm(ESortingAlgorithms.InsertionSort, secondCopyOfNumberList);
                 var thirdResult = SortUsingAlgorithm(ESortingAlgorithms.QuickSort, thirdCopyOfNumberList);
 
-                var stringOfOrderedNumbers = _sortingLogic.ConvertToStringOfNumbers(firstCopyOfNumberList, ' ');
+                var stringOfOrderedNumbers = _conversionLogic.ConvertToStringOfNumbers(firstCopyOfNumberList, ' ');
                 _sortingRepository.SaveSortedNumbers(stringOfOrderedNumbers);
 
                 return new SortResponseDTO() 

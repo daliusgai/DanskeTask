@@ -1,3 +1,4 @@
+using DanskeTask.Core.Interfaces.BusinessLogic;
 using DanskeTask.Core.Interfaces.Repositories;
 using DanskeTask.Core.Interfaces.Services;
 using DanskeTask.Infrastructure.BusinessLogic;
@@ -39,6 +40,7 @@ namespace DanskeTask.Web
 
             services.AddScoped<ISortingRepository, SortingRepository>();
             services.AddScoped<ISortingLogic, SortingLogic>();
+            services.AddScoped<IConversionLogic, ConversionLogic>();
             services.AddScoped<ISortingService, SortingService>();
         }
 
