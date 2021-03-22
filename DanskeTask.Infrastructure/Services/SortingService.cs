@@ -78,12 +78,12 @@ namespace DanskeTask.Infrastructure.Services
                     break;
                 case ESortingAlgorithms.InsertionSort:
                     stopwatch = Stopwatch.StartNew();
-                    _sortingLogic.SortUsingBubbleSort(numberList);
+                    _sortingLogic.SortUsingInsertionSort(numberList);
                     stopwatch.Stop();
                     break;
                 case ESortingAlgorithms.QuickSort:
                     stopwatch = Stopwatch.StartNew();
-                    _sortingLogic.SortUsingBubbleSort(numberList);
+                    _sortingLogic.SortUsingQuickSort(numberList);
                     stopwatch.Stop();
                     break;
                 default:
